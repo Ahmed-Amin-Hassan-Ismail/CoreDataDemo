@@ -18,6 +18,7 @@ do {
 
 ### 2- Retrieve 
 do {
+            
             self.items = try context.fetch(Person.fetchRequest())
             
             DispatchQueue.main.async {
@@ -28,8 +29,26 @@ do {
             print(error.localizedDescription)
         }
 
-### 3- Delete 
-// which person needs to remove
+
+### 3- Edit
+
+// Edit name
+            
+            person.name = textField?.text!
+            
+            // save
+            do {
+                try self.context.save()
+            } catch {
+                print(error.localizedDescription)
+            }
+            
+            // retireve from data
+            self.fetchPeople()
+
+
+### 4- Delete 
+
             let presonToRemove = self.items![indexPath.row]
             
             // Remove from core data
@@ -43,5 +62,5 @@ do {
             }
             
             // retrieve the data
-            self.fetchPeople()
-           
+            self.fetchPeople()           
+          
